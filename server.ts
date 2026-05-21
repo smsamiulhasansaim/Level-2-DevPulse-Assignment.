@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import authRoutes from './routes/authRoutes';
-import issueRoutes from './routes/issueRoutes';
-import { errorHandler } from './middleware/errorHandler';
+import authRoutes from './src/routes/authRoutes';
+import issueRoutes from './src/routes/issueRoutes';
+import { errorHandler } from './src/middleware/errorHandler';
 
 dotenv.config();
 
