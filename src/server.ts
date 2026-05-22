@@ -20,11 +20,9 @@ app.use('/api/issues', issueRoutes);
 
 // Base route test
 app.get('/', (req, res) => {
-  res.json({ message: 'Port is 5000' });
-  res.json({ message: 'DevPulse API is running' });
-  res.json({ message: 'PostgreSQL connection successful' });
-  res.json({ message: 'Welcome to DevPulse API Powered by  S M Samiul Hasan' });
+  res.send('Welcome to DevPulse API - Issue Tracking System powered by  S M Samiul Hasan - Next Level AI-Driven Software Engineering Bootcamp!');
 });
+
 
 // Centralized Error Handler
 app.use(errorHandler);
