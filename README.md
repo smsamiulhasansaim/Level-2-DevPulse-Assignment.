@@ -50,6 +50,8 @@ src/
 ├── routes/
 │   ├── authRoutes.ts
 │   └── issueRoutes.ts
+├── types/
+|      └──index.ts
 ├── utils/
 │   └── responseHelper.ts     # sendSuccess, sendError
 └── server.ts                 # app entry point
@@ -140,12 +142,8 @@ Create a `.env` file in the root:
 
 ```env
 PORT=5000
-
-DATABASE_URL=postgresql://neondb_owner:npg_2bPyMNwRco6H@ep-lingering-pond-aohpd8l3-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require
-
-JWT_SECRET=b4ce77ce6d3aceed0e9dd36efd56e761df4b6fbdbf68
-86f43acf4755818b919056276d37f67f512e9c87ed55
-47f9e21ee6b402523f09936c1928ef4f2bc5cf25
+DATABASE_URL=postgresql://USER:PASSWORD@HOST/DATABASE?sslmode=require
+JWT_SECRET=your_super_secret_key
 ```
 
 4. **Run the SQL schema**
