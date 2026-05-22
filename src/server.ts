@@ -20,7 +20,7 @@ app.use('/api/issues', issueRoutes);
 
 // Base route test
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to DevPulse API' });
+  res.json({ message: 'Welcome to DevPulse API Powered by  S M Samiul Hasan ' });
 });
 
 // Centralized Error Handler

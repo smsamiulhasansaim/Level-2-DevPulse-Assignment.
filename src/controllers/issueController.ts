@@ -27,7 +27,7 @@ export const getAllIssues = async (req: Request, res: Response, next: NextFuncti
   try {
     const { sort, type, status } = req.query;
     
-    // Dynamic Query Building (Without Query Builders)
+    // Dynamic Query Building
     let queryStr = `SELECT * FROM issues WHERE 1=1`;
     const queryParams: any[] = [];
     let paramIdx = 1;
@@ -51,7 +51,7 @@ export const getAllIssues = async (req: Request, res: Response, next: NextFuncti
       return sendSuccess(res, StatusCodes.OK, 'Issues fetched', []);
     }
 
-    // Handle Reporter Relationship without SQL JOIN
+    // Handle Reporter Relationship
     const reporterIds = [...new Set(issues.map(i => i.reporter_id))];
     const usersResult = await pool.query(
       `SELECT id, name, role FROM users WHERE id = ANY($1::int[])`,
@@ -85,7 +85,7 @@ export const getSingleIssue = async (req: Request, res: Response, next: NextFunc
     
     const issue = issueResult.rows[0];
 
-    // Fetch user without JOIN
+    // Fetch user
     const userResult = await pool.query(`SELECT id, name, role FROM users WHERE id = $1`, [issue.reporter_id]);
     
     const { reporter_id, ...issueData } = issue;
