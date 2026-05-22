@@ -2,7 +2,7 @@
 
 A collaborative backend system for software teams to report bugs, suggest features, and coordinate resolutions. Built as part of the **Next Level AI-Driven Software Engineering Bootcamp** by S M Samiul Hasan.
 
-**Live Base URL:** `https://your-live-url.com`
+**Live Base URL:** `https://level-2-dev-pulse-assignment.vercel.app`
 
 ---
 
@@ -123,7 +123,8 @@ CREATE TABLE issues (
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/your-username/devpulse-api.git
+git clone https://github.com/smsamiulhasansaim/Level-2-DevPulse-Assignment..git
+
 cd devpulse-api
 ```
 
@@ -139,8 +140,12 @@ Create a `.env` file in the root:
 
 ```env
 PORT=5000
-DATABASE_URL=postgresql://user:password@localhost:5432/devpulse
-JWT_SECRET=your_super_secret_key
+
+DATABASE_URL=postgresql://neondb_owner:npg_2bPyMNwRco6H@ep-lingering-pond-aohpd8l3-pooler.c-2.ap-southeast-1.aws.neon.tech/neondb?sslmode=verify-full&channel_binding=require
+
+JWT_SECRET=b4ce77ce6d3aceed0e9dd36efd56e761df4b6fbdbf68
+86f43acf4755818b919056276d37f67f512e9c87ed55
+47f9e21ee6b402523f09936c1928ef4f2bc5cf25
 ```
 
 4. **Run the SQL schema**
@@ -208,15 +213,13 @@ GET /api/issues?sort=oldest&type=bug&status=open
 
 | Action | Contributor | Maintainer |
 |---|---|---|
-| Register / Login | ✅ | ✅ |
-| View all issues | ✅ | ✅ |
-| Create issue | ✅ | ✅ |
-| Edit own issue (only if `open`) | ✅ | ✅ |
-| Edit any issue + change status | ❌ | ✅ |
-| Delete any issue | ❌ | ✅ |
-| View system metrics | ❌ | ✅ |
-
----
+| Register / Login | Yes | Yes |
+| View all issues | Yes | Yes |
+| Create issue | Yes | Yes |
+| Edit own issue (only if `open`) | Yes | Yes |
+| Edit any issue + change status | No | Yes |
+| Delete any issue | No | Yes |
+| View system metrics | No | Yes |
 
 ## Response Format
 
@@ -259,4 +262,5 @@ GET /api/issues?sort=oldest&type=bug&status=open
 
 **S M Samiul Hasan** — Full-Stack Web & App Developer  
 Next Level AI-Driven Software Engineering Bootcamp  
-[GitHub](https://github.com/your-username) · [Portfolio](https://samiul.dev)
+
+[GitHub](https://github.com/smsamiulhasansaim) · [Portfolio](https://samiul.jamibd.com)
