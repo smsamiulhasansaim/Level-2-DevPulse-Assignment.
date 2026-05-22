@@ -4,19 +4,23 @@ import jwt from 'jsonwebtoken';
 import { pool } from '../config/db';
 import { StatusCodes } from 'http-status-codes';
 import { sendSuccess, sendError } from '../utils/responseHelper';
+import { SignupBody, LoginBody, User, UserRole } from '../types';
 
-export const signup = async (req: Request, res: Response, next: NextFunction) => {
+export const signup = async (req: Request<object, object, SignupBody>, res: Response, next: NextFunction) => {
   try {
     const { name, email, password, role } = req.body;
+
     if (!name || !email || !password) {
       return sendError(res, StatusCodes.BAD_REQUEST, 'Name, email, and password are required');
     }
 
-    const userRole = role === 'maintainer' ? 'maintainer' : 'contributor';
+    const userRole: UserRole = role === 'maintainer' ? 'maintainer' : 'contributor';
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const result = await pool.query(
-      `INSERT INTO users (name, email, password, role) VALUES ($1, $2, $3, $4) RETURNING id, name, email, role, created_at, updated_at`,
+    const result = await pool.query<Omit<User, 'password'>>(
+      `INSERT INTO users (name, email, password, role)
+       VALUES ($1, $2, $3, $4)
+       RETURNING id, name, email, role, created_at, updated_at`,
       [name, email, hashedPassword, userRole]
     );
 
@@ -26,17 +30,18 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
   }
 };
 
-export const login = async (req: Request, res: Response, next: NextFunction) => {
+export const login = async (req: Request<object, object, LoginBody>, res: Response, next: NextFunction) => {
   try {
     const { email, password } = req.body;
+
     if (!email || !password) {
       return sendError(res, StatusCodes.BAD_REQUEST, 'Email and password are required');
     }
 
-    const result = await pool.query(`SELECT * FROM users WHERE email = $1`, [email]);
+    const result = await pool.query<User>(`SELECT * FROM users WHERE email = $1`, [email]);
     const user = result.rows[0];
 
-    if (!user || !(await bcrypt.compare(password, user.password))) {
+    if (!user || !(await bcrypt.compare(password, user.password as string))) {
       return sendError(res, StatusCodes.UNAUTHORIZED, 'Invalid credentials');
     }
 
@@ -46,10 +51,10 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
       { expiresIn: '1d' }
     );
 
-    // Remove password from response
-    delete user.password;
+    // Exclude password from response
+    const { password: _password, ...safeUser } = user;
 
-    sendSuccess(res, StatusCodes.OK, 'Login successful', { token, user });
+    sendSuccess(res, StatusCodes.OK, 'Login successful', { token, user: safeUser });
   } catch (error) {
     next(error);
   }

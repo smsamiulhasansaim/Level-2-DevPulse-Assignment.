@@ -20,7 +20,7 @@ app.use('/api/issues', issueRoutes);
 
 // Base route test
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to DevPulse API - Issue Tracking System powered by  S M Samiul Hasan - Next Level AI-Driven Software Engineering Bootcamp!' });
+  res.json({ message: 'Welcome to DevPulse API - Issue Tracking System Powered by S M Samiul Hasan - Next Level AI-Driven Software Engineering Bootcamp!' });
 });
 
 // Centralized Error Handler

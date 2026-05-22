@@ -1,17 +1,17 @@
 import { Response } from 'express';
 
-export const sendSuccess = (res: Response, statusCode: number, message: string, data?: any) => {
+export const sendSuccess = (res: Response, statusCode: number, message: string, data?: unknown) => {
   res.status(statusCode).json({
     success: true,
     message,
-    ...(data && { data })
+    ...(data !== undefined && { data })
   });
 };
 
-export const sendError = (res: Response, statusCode: number, message: string, errors?: any) => {
+export const sendError = (res: Response, statusCode: number, message: string, errors?: unknown) => {
   res.status(statusCode).json({
     success: false,
     message,
-    ...(errors && { errors })
+    ...(errors !== undefined && { errors })
   });
 };
