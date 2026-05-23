@@ -14,7 +14,7 @@ declare global {
 
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers['authorization'];
-  const token = authHeader; // Spec: Authorization: <JWT_TOKEN> (no Bearer prefix)
+  const token = authHeader;
 
   if (!token) {
     return sendError(res, StatusCodes.UNAUTHORIZED, 'Access denied. No token provided.');
